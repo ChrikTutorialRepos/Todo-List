@@ -17,7 +17,7 @@ $("input").keypress(function(e){
     }
 });
 
-$(".fa-plus").click(function(){
+$(".fa-plus").on('click touchstart', function(){
     $("input[type='text'").fadeToggle();
 });
 
