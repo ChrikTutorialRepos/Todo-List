@@ -28,7 +28,7 @@ input[type=text]{
     width: 100%;
     padding: 13px 13px 13px 20px;
     box-sizing: border-box;
-    color: #2980b9;
+    color: var(--primary);
     border: 3px solid rgba(0,0,0,0);
     display: none;
 }

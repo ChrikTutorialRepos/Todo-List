@@ -9,7 +9,7 @@ $("ul").on("click","li",(function(){
     $(this).toggleClass("checked");
 }));
 
-$("input[input='text'").keypress(function(e){
+$("input[type='text']").keypress(function(e){
     if(e.which === 13){
         var input = $(this).val();
         $("ul").append($("<li><span class='delete'><i class='far fa-trash-alt'></i></span> " + input + "</li>"));
@@ -73,11 +73,11 @@ window.onload = function(){
     else{
         todos = todosString.split("%%##%%,");
         document.documentElement.style.setProperty('--primary', todos[0]);
-        $("input[name='primary']")[0].value = todos[0];
+        $("input[name='primary']")[0].value = todos[0].trim();
         document.documentElement.style.setProperty('--b1', todos[1]);
-        $("input[name='b1']")[0].value = todos[1];
+        $("input[name='b1']")[0].value = todos[1].trim();
         document.documentElement.style.setProperty('--b2', todos[2]);
-        $("input[name='b2']")[0].value = todos[2];
+        $("input[name='b2']")[0].value = todos[2].trim();
         for(var i = 3; i < todos.length-1; i+=2){
             if(todos[i] == "0"){
                 $("ul").append($("<li><span class='delete'><i class='far fa-trash-alt'></i></span>" + todos[i+1] + "</li>"));
