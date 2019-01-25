@@ -19,6 +19,7 @@ $("input").keypress(function(e){
 
 $("i").on('click touchstart', function(){
     $("input[type='text'").fadeToggle();
+    $("input[type='text'").select();
     $(this).fadeOut(250,function(){
         $(this).toggleClass("fa-minus");
         $(this).toggleClass("fa-plus");
