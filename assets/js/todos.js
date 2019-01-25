@@ -9,7 +9,7 @@ $("ul").on("click","li",(function(){
     $(this).toggleClass("checked");
 }));
 
-$("input").keypress(function(e){
+$("input[input='text'").keypress(function(e){
     if(e.which === 13){
         var input = $(this).val();
         $("ul").append($("<li><span class='delete'><i class='far fa-trash-alt'></i></span> " + input + "</li>"));
@@ -17,7 +17,7 @@ $("input").keypress(function(e){
     }
 });
 
-$("i").on('click touchstart', function(){
+$(".fa-minus, .fa-plus").on('click touchstart', function(){
     $("input[type='text'").fadeToggle();
     $("input[type='text'").select();
     $(this).fadeOut(250,function(){
@@ -27,9 +27,29 @@ $("i").on('click touchstart', function(){
     });
 });
 
+$(".fa-cog").on('click touchstart', function(){
+    $("#settings").fadeToggle();
+});
+
+$("input[name = 'primary']").on("change", function(event){
+    document.documentElement.style.setProperty('--primary', event.target.value);
+});
+
+$("input[name = 'b1']").on("change", function(event){
+    document.documentElement.style.setProperty('--b1', event.target.value);
+});
+
+$("input[name = 'b2']").on("change", function(event){
+    document.documentElement.style.setProperty('--b2', event.target.value);
+});
+
 window.onbeforeunload = function(){
     var lis = $("li");
     var todos = [];
+    var style = getComputedStyle(document.body);
+    todos.push(style.getPropertyValue('--primary') + "%%##%%");
+    todos.push(style.getPropertyValue('--b1') + "%%##%%");
+    todos.push(style.getPropertyValue('--b2') + "%%##%%");
     for(var i = 0; i < lis.length; i++){
         if(lis[i].classList.contains("checked")){
             todos.push(1 + "%%##%%");
@@ -44,13 +64,21 @@ window.onbeforeunload = function(){
 };
 
 window.onload = function(){
+    //window.localStorage.clear();
     var todosString = window.localStorage.getItem("list");
-    var todos = todosString.split("%%##%%,");
-    if(todosString.length === 0){
+    var todos;
+    if(todosString == null){
         $("ul").append($("<li><span class='delete'><i class='far fa-trash-alt'></i></span>Create Todo List</li>"));
     }
     else{
-        for(var i = 0; i < todos.length-1; i+=2){
+        todos = todosString.split("%%##%%,");
+        document.documentElement.style.setProperty('--primary', todos[0]);
+        $("input[name='primary']")[0].value = todos[0];
+        document.documentElement.style.setProperty('--b1', todos[1]);
+        $("input[name='b1']")[0].value = todos[1];
+        document.documentElement.style.setProperty('--b2', todos[2]);
+        $("input[name='b2']")[0].value = todos[2];
+        for(var i = 3; i < todos.length-1; i+=2){
             if(todos[i] == "0"){
                 $("ul").append($("<li><span class='delete'><i class='far fa-trash-alt'></i></span>" + todos[i+1] + "</li>"));
             }
