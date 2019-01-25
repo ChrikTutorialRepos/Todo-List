@@ -17,8 +17,13 @@ $("input").keypress(function(e){
     }
 });
 
-$(".fa-plus").on('click touchstart', function(){
+$("i").on('click touchstart', function(){
     $("input[type='text'").fadeToggle();
+    $(this).fadeOut(250,function(){
+        $(this).toggleClass("fa-minus");
+        $(this).toggleClass("fa-plus");
+        $(this).fadeIn(250);
+    });
 });
 
 window.onbeforeunload = function(){
